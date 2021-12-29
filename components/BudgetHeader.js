@@ -19,7 +19,7 @@ const BudgetHeader = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    height: '30%',
     backgroundColor: Colors.blueDark,
     alignItems: 'center',
     justifyContent: 'center'

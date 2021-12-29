@@ -4,7 +4,7 @@ import {
   StatusBar,
   StyleSheet,
   Text,
-  View
+  View,
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
