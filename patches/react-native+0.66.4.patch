@@ -1,0 +1,17 @@
+diff --git a/node_modules/react-native/React/Base/RCTBridgeModule.h b/node_modules/react-native/React/Base/RCTBridgeModule.h
+index 9ad1836..27a6ef0 100644
+--- a/node_modules/react-native/React/Base/RCTBridgeModule.h
++++ b/node_modules/react-native/React/Base/RCTBridgeModule.h
+@@ -8,7 +8,11 @@
+ #import <Foundation/Foundation.h>
+ #import <UIKit/UIKit.h>
+ 
+-#import <React/RCTDefines.h>
++#if __has_include("RCTDefines.h")
++  #import "RCTDefines.h"
++#else
++ #import <React/RCTDefines.h>
++#endif
+ 
+ @class RCTBridge;
+ @protocol RCTBridgeMethod;
