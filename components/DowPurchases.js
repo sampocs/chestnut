@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import Colors from '../constants/Colors.js';
 import Fonts from '../constants/Fonts.js';
+import PurchaseItem from './PurchaseItem.js';
 import ReactNativeHapticFeedback from "react-native-haptic-feedback";
 import Context from '../storage/Context.js';
 import { Actions } from '../storage/Reducer.js';
@@ -37,27 +38,8 @@ const DowPurchases = ({ week, dow }) => {
       }}
       style={styles.container}>
       <Text style={styles.dowHeadingText}>{dow}</Text>
-      {purchases.map((purchase, index) => (
-        <View key={index} style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          marginLeft: 10,
-          marginRight: 10,
-          padding: 5,
-          borderTopWidth: index === 0 ? 0 : 1,
-          borderTopColor: Colors.greyLight
-        }}>
-          <TextInput
-            style={styles.purchaseItemText}
-            value={purchase.item} 
-            placeholder={'Item'}
-            />
-          <TextInput 
-            style={styles.purchaseItemText} 
-            value={purchase.price.toString()} 
-            placeholder={'$'}
-            />
-        </View>
+      {purchases.map((purchase, itemIndex) => (
+        <PurchaseItem key={itemIndex} purchase={purchase} itemIndex={itemIndex} />
       ))}
     </Pressable>
   )
@@ -82,11 +64,6 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.helvetica,
     fontSize: 25,
     marginBottom: 2
-  },
-  purchaseItemText: {
-    fontFamily: Fonts.arial,
-    fontSize: 20,
-    color: Colors.blueDark,
   }
 })
 

@@ -1,20 +1,26 @@
-export const getCurrentWeek = () => {
-    const sunday = new Date();
-    const dowOffset = sunday.getDay();
-    sunday.setDate(sunday.getDate() - dowOffset);
+const moment = require('moment');
+
+const DATE_INTERNAL_FORMAT = "YYYY-MM-DD"
+const DATE_DISPLAYED_FORMAT = "MMM D"
+
+export const getCurrentWeekStartDate = () => {
+    const sunday = new moment();
+    const dowOffset = sunday.day();
+    sunday.subtract(dowOffset, 'days');
     
     return sunday
 }
 
-export const formatDate = (date) => {
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1;
-    const day = date.getDate();
-    
-    return `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}` 
+export const formatDateInternal = (date) => {
+    return date.format(DATE_INTERNAL_FORMAT)
 }
 
-export const addWeek = (startDate, numDays) => {
-    startDate.setDate(startDate.getDate() + (numDays * 7));
-    return startDate
+export const formatDateDisplayed = (date) => {
+    return date.format(DATE_DISPLAYED_FORMAT)
+}
+
+export const addWeek = (startDate, numWeeks) => {
+    const newDate = new moment(startDate.format(DATE_INTERNAL_FORMAT));
+    newDate.add(numWeeks * 7, 'days');
+    return newDate
 }

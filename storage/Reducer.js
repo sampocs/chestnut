@@ -1,7 +1,14 @@
 export const Actions = {
+    SET_WEEK: 'SET_WEEK',
     ADD_ITEM: 'ADD_ITEM',
     REMOVE_ITEM: 'REMOVE_ITEM',
-    UPDATE_ITEM: 'UPDATE_ITEM',
+    UPDATE_ITEM: 'UPDATE_ITEM'
+}
+
+const setWeek = (state, { week }) => {
+    const newState = {...state};
+    newState.currentWeek = week;
+    return newState
 }
 
 const validateDowInWeek = (state, week, dow) => {
@@ -78,6 +85,8 @@ const updateItem = (state, {week, dow, itemIndex, item: {name, price}}) => {
 
 export const Reducer = (state, action) => {
     switch (action.type) {
+        case Actions.SET_WEEK:
+            return setWeek(state, action.payload);
         case Actions.ADD_ITEM:
             return addItem(state, action.payload);
         case Actions.REMOVE_ITEM:

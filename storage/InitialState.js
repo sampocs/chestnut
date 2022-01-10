@@ -1,17 +1,30 @@
-import { formatDate, getCurrentWeek, addWeek } from './DateUtils.js';
+import { 
+    getCurrentWeekStartDate, 
+    addWeek, 
+    formatDateInternal, 
+    formatDateDisplayed 
+} from './DateUtils.js';
 
-const firstWeek = getCurrentWeek();
+const firstWeekStartDate = getCurrentWeekStartDate();
 const numWeeks = 10;
 const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
 let InitialState = {
+    currentWeek: firstWeekStartDate,
     daysOfWeek: daysOfWeek,
     weeks: []
 };
 for (let weekNum = 0; weekNum < numWeeks; weekNum++) {
-    const week = formatDate(addWeek(firstWeek, weekNum));
-    InitialState.weeks.push(week);
-    InitialState[week] = { 
+    const weekStartDate = addWeek(firstWeekStartDate, weekNum);
+    const weekStartDateInternal = formatDateInternal(weekStartDate);
+    const weekStartDateDisplayed = formatDateDisplayed(weekStartDate);
+
+    InitialState.weeks.push({
+        weekStartDate: weekStartDateInternal, 
+        weekStartDateFormatted: weekStartDateDisplayed
+    });
+
+    InitialState[weekStartDateInternal] = { 
         total: 0,
         weeklyPurchases: daysOfWeek.reduce((purchaseObj, dow) => {
             purchaseObj[dow] = [];
