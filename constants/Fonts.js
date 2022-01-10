@@ -1,3 +1,6 @@
 export default {
-    arial: "Arial"
+    arial: "Arial",
+    helvetica: "Helvetica Neue",
+    avenir: "Avenir",
+    avenirNext: "Avenir Next"
 }

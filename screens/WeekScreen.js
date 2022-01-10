@@ -18,23 +18,14 @@ const WeekScreen = () => {
     <>
       <StatusBar barStyle="light-content" />
       <View style={{ flex: 1 }}>
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <BudgetHeader />
-        </TouchableWithoutFeedback>
+        <BudgetHeader />
         <DateCarousel />
         <KeyboardAvoidingView style={{ flex: 1 }} behavior={'padding'}>
           <BudgetBody />
         </KeyboardAvoidingView>
       </View>
-
     </>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  }
-})
 
 export default WeekScreen;

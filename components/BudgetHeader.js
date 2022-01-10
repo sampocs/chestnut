@@ -3,7 +3,9 @@ import {
   View,
   Text,
   StyleSheet,
-  useWindowDimensions
+  useWindowDimensions,
+  TouchableWithoutFeedback,
+  Keyboard
 } from 'react-native';
 import Colors from '../constants/Colors.js';
 import Fonts from '../constants/Fonts.js';
@@ -17,13 +19,15 @@ const BudgetHeader = () => {
   const progressBarInnerWidth = Math.min((spent / budget) * progressBarOuterWidth, progressBarOuterWidth);
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>{`${spent}/${budget}`}</Text>
-      <View>
-        <View style={{ ...styles.progressBarOuter, width: progressBarOuterWidth }}></View>
-        <View style={{ ...styles.progressBarInner, width: progressBarInnerWidth }}></View>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={styles.container}>
+        <Text style={styles.text}>{`${spent}/${budget}`}</Text>
+        <View>
+          <View style={{ ...styles.progressBarOuter, width: progressBarOuterWidth }}></View>
+          <View style={{ ...styles.progressBarInner, width: progressBarInnerWidth }}></View>
+        </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   )
 }
 
@@ -36,7 +40,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: Colors.white,
-    fontFamily: Fonts.arial,
+    fontFamily: Fonts.avenirNext,
     fontSize: 55,
     fontWeight: "bold",
     marginBottom: 20

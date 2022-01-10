@@ -77,13 +77,13 @@ const styles = StyleSheet.create({
     height: 65,
     alignItems: 'center',
     justifyContent: 'center',
-    shadowColor: 'black',
+    shadowColor: Colors.black,
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 1,
     marginVertical: 10
   },
   text: {
-    fontFamily: Fonts.arial,
+    fontFamily: Fonts.avenirNext,
     fontSize: 35,
     color: Colors.white,
     fontWeight: "bold"
