@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.white,
     borderWidth: 0,
-    borderColor: Colors.greyLight,
+    borderColor: Colors.greyMed,
     borderRadius: 10,
     marginVertical: 5,
     marginHorizontal: 20,

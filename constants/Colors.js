@@ -1,7 +1,8 @@
 export default {
     white: "white",
     black: "black",
-    greyLight: "#C2C3C5",
+    greyLight: "#E1E2E3",
+    greyMed: "#C2C3C5",
     greyDark: "#888B90",
     blueDark: "#31445B",
     blueLight: "#8499B1",

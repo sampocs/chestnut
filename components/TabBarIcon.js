@@ -4,7 +4,7 @@ import Colors from "../constants/Colors";
 
 const TabBarIcon = ({ route, focused }) => {
     let iconName;
-    let color = focused ? Colors.blueDark : Colors.greyLight;
+    let color = focused ? Colors.blueDark : Colors.greyMed;
     if (route.name === 'Week') {
         iconName = 'list-ul'
 

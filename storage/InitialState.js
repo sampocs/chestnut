@@ -27,7 +27,10 @@ for (let weekNum = 0; weekNum < numWeeks; weekNum++) {
     InitialState[weekStartDateInternal] = { 
         total: 0,
         weeklyPurchases: daysOfWeek.reduce((purchaseObj, dow) => {
-            purchaseObj[dow] = [];
+            purchaseObj[dow] = [
+                {item: "The Crepe Shop", price: "8", validEntry: true},
+                {item: "Marianos", price: "32", validEntry: true},
+            ];
             return purchaseObj;
         }, {})
     }
