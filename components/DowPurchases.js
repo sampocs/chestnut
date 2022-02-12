@@ -29,7 +29,7 @@ const DowPurchases = ({ week, dow }) => {
     ReactNativeHapticFeedback.trigger("impactHeavy", hapticOptions)
   }
 
-  const onDoubleTap = () => {
+  const toggleDeleteMode = () => {
     const time = new Date().getTime();
     const delta = time - lastHeaderTap;
 
@@ -41,19 +41,21 @@ const DowPurchases = ({ week, dow }) => {
     }
   }
 
+  const addItem = () => {
+    triggerHaptic();
+    dispatch({
+      type: Actions.ADD_ITEM,
+      payload: {
+        week: week,
+        dow: dow
+      }
+    })
+  }
+
   return (
     <Pressable
-      onLongPress={() => {
-        triggerHaptic();
-        dispatch({
-          type: Actions.ADD_ITEM,
-          payload: {
-            week: week,
-            dow: dow
-          }
-        })
-      }}
-      onPress={onDoubleTap}
+      onLongPress={addItem}
+      onPress={toggleDeleteMode}
       style={styles.container}>
       <Text style={styles.dowHeadingText}>{dow}</Text>
       {purchases.map((_, itemIndex) => (

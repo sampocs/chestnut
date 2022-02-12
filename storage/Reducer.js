@@ -55,10 +55,23 @@ const removeItem = (state, {week, dow, itemIndex}) => {
     }
 
     const newState = {...state};
-    const removedItem = newState[week].weeklyPurchases[dow].splice(itemIndex, 1);
-    if (removeItem.validEntry) {
-        newState[week].spent -=  parseInt(removedItem.price)
+    newState[week].weeklyPurchases[dow].splice(itemIndex, 1);
+
+    const daysOfWeek = newState.daysOfWeek;
+
+    let spent = 0;
+    for (let dowIndex = 0; dowIndex < daysOfWeek.length; dowIndex++) {
+
+        let purchases = newState[week].weeklyPurchases[daysOfWeek[dowIndex]];
+        for (let purchaseIndex = 0; purchaseIndex < purchases.length; purchaseIndex++) {
+            const spentAsInt = parseInt(purchases[purchaseIndex].price)
+            if (!isNaN(spentAsInt)) {
+                spent += spentAsInt
+            }
+        }
     }
+
+    newState[week].spent = spent;
 
     return newState
 }

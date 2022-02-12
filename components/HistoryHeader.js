@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   View,
   Text,
@@ -7,13 +7,12 @@ import {
 } from 'react-native';
 import Colors from '../constants/Colors.js';
 import Fonts from '../constants/Fonts.js';
+import Context from '../storage/Context.js';
 
-const HistoryHeader = () => {
-  const spent = 107;
-
+const HistoryHeader = ({ weeklyAverage }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.spentText}>${spent}</Text>
+      <Text style={styles.spentText}>${weeklyAverage}</Text>
       <Text style={styles.averageText}>Weekly Average</Text>
     </View>
   )
