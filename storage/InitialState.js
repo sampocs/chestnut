@@ -10,7 +10,7 @@ const numWeeks = 10;
 const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
 let InitialState = {
-    currentWeek: firstWeekStartDate,
+    currentWeek: formatDateInternal(firstWeekStartDate),
     daysOfWeek: daysOfWeek,
     weeks: []
 };
@@ -25,15 +25,21 @@ for (let weekNum = 0; weekNum < numWeeks; weekNum++) {
     });
 
     InitialState[weekStartDateInternal] = { 
-        total: 0,
+        spent: 0,
+        budget: 300,
         weeklyPurchases: daysOfWeek.reduce((purchaseObj, dow) => {
-            purchaseObj[dow] = [
-                {item: "The Crepe Shop", price: "8", validEntry: true},
-                {item: "Marianos", price: "32", validEntry: true},
-            ];
+            purchaseObj[dow] = [];
             return purchaseObj;
         }, {})
     }
 }
+
+InitialState[formatDateInternal(firstWeekStartDate)].weeklyPurchases = daysOfWeek.reduce((purchaseObj, dow) => {
+    purchaseObj[dow] = [
+        {name: "The Crepe Shop", price: 8},
+        {name: "Marianos", price: 32},
+    ];
+    return purchaseObj;
+}, {})
 
 export default InitialState;

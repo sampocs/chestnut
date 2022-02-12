@@ -1,26 +1,71 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import {
   View,
   Text,
   StyleSheet,
   useWindowDimensions,
   TouchableWithoutFeedback,
-  Keyboard
+  Keyboard,
+  TextInput,
+  Alert
 } from 'react-native';
+import Prompt from '../components/Prompt.js';
+import Context from '../storage/Context.js';
+import Actions from '../storage/Actions.js';
 import Colors from '../constants/Colors.js';
 import Fonts from '../constants/Fonts.js';
 
+const validateBudgetUpdate = (budget) => {
+  try {
+    const budgetParsed = parseInt(budget);
+    if (budgetParsed > 0) {
+      return budgetParsed;
+    }
+  } catch (error) {
+    return undefined;
+  }
+}
+
 const BudgetHeader = () => {
-  const spent = 325;
-  const budget = 450;
+
+  const { state, dispatch } = useContext(Context);
+  const { currentWeek } = state;
+  const spent = state[currentWeek].spent;
+  const budget = state[currentWeek].budget;
+  const [promptVisible, setPromptVisible] = useState(false);
 
   const { width: screenWidth } = useWindowDimensions();
   const progressBarOuterWidth = screenWidth - 30;
   const progressBarInnerWidth = Math.min((spent / budget) * progressBarOuterWidth, progressBarOuterWidth);
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+    <TouchableWithoutFeedback
+      onPress={Keyboard.dismiss}
+      onLongPress={() => setPromptVisible(true)}>
       <View style={styles.container}>
+        <Prompt
+          visible={promptVisible}
+          title="Budget"
+          placeholder="$"
+          onCancel={() => {
+            setPromptVisible(false);
+          }}
+          onSubmit={text => {
+            setPromptVisible(false);
+            const parsedBudget = validateBudgetUpdate(text);
+            if (parsedBudget === undefined) {
+              Alert.alert('Invalid Input')
+            } else {
+              dispatch({
+                type: Actions.UPDATE_BUDGET,
+                payload: {
+                  startWeek: currentWeek,
+                  budget: parsedBudget
+                }
+              })
+            }
+          }}
+        />
         <Text style={styles.text}>{`${spent}/${budget}`}</Text>
         <View>
           <View style={{ ...styles.progressBarOuter, width: progressBarOuterWidth }}></View>

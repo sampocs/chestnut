@@ -1,14 +1,21 @@
-export const Actions = {
-    SET_WEEK: 'SET_WEEK',
-    ADD_ITEM: 'ADD_ITEM',
-    REMOVE_ITEM: 'REMOVE_ITEM',
-    UPDATE_ITEM: 'UPDATE_ITEM'
+import Actions from './Actions.js';
+
+const setWeek = (state, { index }) => {
+    const newState = {...state};
+    const newWeek = state.weeks[index].weekStartDate;
+    newState.currentWeek = newWeek;
+    return newState
 }
 
-const setWeek = (state, { week }) => {
+const updateBudget = (state, { startWeek, budget }) => {
     const newState = {...state};
-    newState.currentWeek = week;
-    return newState
+    for (let i = 0; i < state.weeks.length; i++) {
+        const currWeek = state.weeks[i].weekStartDate;
+        if (currWeek >= startWeek) {
+            newState[currWeek].budget = budget;
+        }
+    }
+    return newState;
 }
 
 const validateDowInWeek = (state, week, dow) => {
@@ -31,7 +38,7 @@ const addItem = (state, {week, dow}) => {
         return {...state}
     }
 
-    const emptyItem = {name: "", price: "", validEntry: false}
+    const emptyItem = {name: "", price: ""}
     const newState = {...state};
     const newItemList = [...state[week].weeklyPurchases[dow], emptyItem];
 
@@ -49,35 +56,39 @@ const removeItem = (state, {week, dow, itemIndex}) => {
     const newState = {...state};
     const removedItem = newState[week].weeklyPurchases[dow].splice(itemIndex, 1);
     if (removeItem.validEntry) {
-        newState[week].total -=  parseInt(removedItem.price)
+        newState[week].spent -=  parseInt(removedItem.price)
     }
 
     return newState
 }
 
-const updateItem = (state, {week, dow, itemIndex, item: {name, price}}) => {
+const updateItem = (state, { week, dow, itemIndex, itemName, itemPrice }) => {
     const dowInState = validateDowInWeek(state, week, dow);
     if (!dowInState) {
         return {...state}
     }
 
     const newState = {...state};
-    const newPurchases = [...newState[week].weeklyPurchases[dow]];
+    const newItem = newState[week].weeklyPurchases[dow][itemIndex];
 
-    const oldItem = newPurchases[itemIndex];
-    const oldPrice = oldItem.price;
-    const oldValidStatus = oldItem.validEntry;
+    newItem.name = itemName;
+    newItem.price = itemPrice;
 
-    const newItem = {...oldItem};
+    const daysOfWeek = newState.daysOfWeek;
 
-    newItem.name = name;
-    newItem.price = price;
-    newItem.validEntry = (name !== '' && price !== '');
+    let spent = 0;
+    for (let dowIndex = 0; dowIndex < daysOfWeek.length; dowIndex++) {
 
-    if (oldValidStatus) {
-        const priceChange = price - oldPrice;
-        newState[week].total += priceChange;
+        let purchases = newState[week].weeklyPurchases[daysOfWeek[dowIndex]];
+        for (let purchaseIndex = 0; purchaseIndex < purchases.length; purchaseIndex++) {
+            const spentAsInt = parseInt(purchases[purchaseIndex].price)
+            if (!isNaN(spentAsInt)) {
+                spent += spentAsInt
+            }
+        }
     }
+
+    newState[week].spent = spent;
 
     return newState;
 }
@@ -87,6 +98,8 @@ export const Reducer = (state, action) => {
     switch (action.type) {
         case Actions.SET_WEEK:
             return setWeek(state, action.payload);
+        case Actions.UPDATE_BUDGET:
+            return updateBudget(state, action.payload);
         case Actions.ADD_ITEM:
             return addItem(state, action.payload);
         case Actions.REMOVE_ITEM:

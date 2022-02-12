@@ -14,8 +14,8 @@ import Context from '../storage/Context.js';
 const BudgetBody = () => {
   const { width: screenWidth } = useWindowDimensions();
   const { state } = useContext(Context);
-  const currentWeek = "2022-01-09";
-
+  const { currentWeek } = state;
+  
   return (
     <View style={styles.container}>
       <FlatList
@@ -24,7 +24,6 @@ const BudgetBody = () => {
         renderItem={({ item }) => (
           <DowPurchases week={currentWeek} dow={item} />
         )}
-        // keyExtractor={(item) => item.dow} 
         />
     </View>
   )

@@ -6,5 +6,6 @@ export default {
     greyDark: "#888B90",
     blueDark: "#31445B",
     blueLight: "#8499B1",
-    greenDark: "#408683"
+    greenDark: "#408683",
+    redDark: "#A32E00"
 }

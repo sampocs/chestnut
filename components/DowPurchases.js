@@ -11,19 +11,36 @@ import Fonts from '../constants/Fonts.js';
 import PurchaseItem from './PurchaseItem.js';
 import ReactNativeHapticFeedback from "react-native-haptic-feedback";
 import Context from '../storage/Context.js';
-import { Actions } from '../storage/Reducer.js';
+import Actions from '../storage/Actions.js';
 
-const triggerHaptic = () => {
-  const hapticOptions = {
-    enableVibrateFallback: true,
-    ignoreAndroidSystemSettings: false
-  };
-  ReactNativeHapticFeedback.trigger("impactHeavy", hapticOptions)
-}
+const DOUBLE_TAP_DELAY = 400;
 
 const DowPurchases = ({ week, dow }) => {
   const { state, dispatch } = useContext(Context);
   const purchases = state[week].weeklyPurchases[dow];
+  const [deleteMode, setDeleteMode] = useState(false);
+  const [lastHeaderTap, setLastHeaderTap] = useState(null);
+
+  const triggerHaptic = () => {
+    const hapticOptions = {
+      enableVibrateFallback: true,
+      ignoreAndroidSystemSettings: false
+    };
+    ReactNativeHapticFeedback.trigger("impactHeavy", hapticOptions)
+  }
+
+  const onDoubleTap = () => {
+    const time = new Date().getTime();
+    const delta = time - lastHeaderTap;
+
+    if (delta < DOUBLE_TAP_DELAY) {
+      setDeleteMode(!deleteMode);
+      setLastHeaderTap(null);
+    } else {
+      setLastHeaderTap(time);
+    }
+  }
+
   return (
     <Pressable
       onLongPress={() => {
@@ -31,15 +48,22 @@ const DowPurchases = ({ week, dow }) => {
         dispatch({
           type: Actions.ADD_ITEM,
           payload: {
-            week: '2022-01-09',
+            week: week,
             dow: dow
           }
         })
       }}
+      onPress={onDoubleTap}
       style={styles.container}>
       <Text style={styles.dowHeadingText}>{dow}</Text>
-      {purchases.map((purchase, itemIndex) => (
-        <PurchaseItem key={itemIndex} purchase={purchase} itemIndex={itemIndex} />
+      {purchases.map((_, itemIndex) => (
+        <PurchaseItem
+          week={week}
+          dow={dow}
+          key={itemIndex}
+          itemIndex={itemIndex}
+          deleteMode={deleteMode}
+        />
       ))}
     </Pressable>
   )
