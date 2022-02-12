@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext } from 'react';
+import React, { useState, useRef, useContext, useEffect } from 'react';
 import {
   View,
   Text,
@@ -37,11 +37,16 @@ const DateCarousel = () => {
 
   const ref = useRef();
   const { state, dispatch } = useContext(Context);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(state.currentWeekIndex);
 
   const dateHeaders = state.weeks.map(({ weekStartDateFormatted }) => ({
     title: weekStartDateFormatted
   }))
+
+  useEffect(() => {
+    snapToItem(state.currentWeekIndex);
+    setActiveIndex(state.currentWeekIndex);
+  }, [state.currentWeekIndex])
 
   const snapToItem = (index) => {
     ref.current?.snapToItem?.(index);

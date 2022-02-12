@@ -4,6 +4,7 @@ const setWeek = (state, { index }) => {
     const newState = {...state};
     const newWeek = state.weeks[index].weekStartDate;
     newState.currentWeek = newWeek;
+    newState.currentWeekIndex = index;
     return newState
 }
 

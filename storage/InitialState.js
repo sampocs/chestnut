@@ -11,6 +11,7 @@ const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Fri
 
 let InitialState = {
     currentWeek: formatDateInternal(firstWeekStartDate),
+    currentWeekIndex: 0,
     daysOfWeek: daysOfWeek,
     weeks: []
 };

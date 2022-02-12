@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import {
   View,
   StyleSheet,
@@ -9,16 +9,18 @@ import {
 import Colors from '../constants/Colors.js';
 import DowPurchases from './DowPurchases.js';
 import Context from '../storage/Context.js';
-
+import { KeyboardAwareFlatList } from 'react-native-keyboard-aware-scroll-view';
 
 const BudgetBody = () => {
   const { width: screenWidth } = useWindowDimensions();
-  const { state } = useContext(Context);
+  const { state, setKeyboardAvoidingScrollRef } = useContext(Context);
   const { currentWeek } = state;
-  
+
   return (
     <View style={styles.container}>
-      <FlatList
+      <KeyboardAwareFlatList
+        innerRef={setKeyboardAvoidingScrollRef}
+        enableResetScrollToCoords={false}
         contentContainerStyle={{ width: screenWidth, paddingTop: 10 }}
         data={state.daysOfWeek}
         renderItem={({ item }) => (

@@ -15,7 +15,7 @@ import Actions from '../storage/Actions.js';
 
 
 const PurchaseItem = ({ week, dow, itemIndex, deleteMode }) => {
-  const { state, dispatch } = useContext(Context);
+  const { state, dispatch, keyboardAvoidingScrollRef } = useContext(Context);
   const purchase = state[week].weeklyPurchases[dow][itemIndex];
 
   const [priceTextInputRef, setPriceTextInputRef] = useState(null);
@@ -90,7 +90,12 @@ const PurchaseItem = ({ week, dow, itemIndex, deleteMode }) => {
               keyboardType={'number-pad'}
               placeholder={'$'}
               onChangeText={setItemPrice}
-              onEndEditing={updateItem}
+              onEndEditing={() => {
+                updateItem();
+                if (dow === 'Friday' || dow === 'Saturday') {
+                  keyboardAvoidingScrollRef.scrollToEnd();
+                }
+              }}
               returnKeyType={'done'}
             />}
         </View>

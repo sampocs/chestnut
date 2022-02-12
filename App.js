@@ -1,4 +1,4 @@
-import React, { createContext, useReducer } from 'react';
+import React, { createContext, useReducer, useState } from 'react';
 import {
   SafeAreaView,
   StatusBar,
@@ -20,9 +20,17 @@ const Tab = createBottomTabNavigator();
 
 const App = () => {
   const [state, dispatch] = useReducer(Reducer, InitialState);
+  const [keyboardAvoidingScrollRef, setKeyboardAvoidingScrollRef] = useState(null);
+
+  const contextValues = {
+    state, 
+    dispatch,
+    keyboardAvoidingScrollRef,
+    setKeyboardAvoidingScrollRef
+  }
 
   return (
-    <Context.Provider value={{state, dispatch}}>
+    <Context.Provider value={contextValues}>
       <NavigationContainer>
         <Tab.Navigator
           initialRouteName="Week"

@@ -15,9 +15,9 @@ const WeekScreen = () => {
       <View style={{ flex: 1 }}>
         <BudgetHeader />
         <DateCarousel />
-        <KeyboardAvoidingView style={{ flex: 1}} behavior={'padding'}>
+        {/* <KeyboardAvoidingView style={{ flex: 1}} behavior={'padding'}> */}
           <BudgetBody />
-        </KeyboardAvoidingView>
+        {/* </KeyboardAvoidingView> */}
       </View>
     </>
   )
