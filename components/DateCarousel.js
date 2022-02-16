@@ -3,10 +3,8 @@ import {
   View,
   Text,
   StyleSheet,
-  Dimentions,
   useWindowDimensions,
-  TouchableWithoutFeedback,
-  PureComponent
+  TouchableWithoutFeedback
 } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import Actions from '../storage/Actions.js';
@@ -14,6 +12,12 @@ import Fonts from '../constants/Fonts.js';
 import Colors from '../constants/Colors.js'
 import Context from '../storage/Context.js';
 
+/**
+ * Component that acts as the header for a given week (e.g. "Feb 6")
+ * This is returned via a flatlist for each week 
+ * A PureComponent is used for performance
+ * @component
+ */
 class DateHeader extends React.PureComponent {
   render() {
     return (
@@ -25,34 +29,40 @@ class DateHeader extends React.PureComponent {
     );
   }
 }
-const _renderItem = ({ item, index, snapToItem }) => {
-  return (
-    <DateHeader title={item.title} onPress={() => snapToItem(index)}></DateHeader>
-  )
-}
 
+/**
+ * Horizontally scrollable header for each week, allowing the user
+ * to see their expenses for that week
+ * @component
+ */
 const DateCarousel = () => {
-  const { width: screenWidth } = useWindowDimensions();
-  const itemWidth = screenWidth / 2;
 
   const ref = useRef();
   const { state, dispatch } = useContext(Context);
   const [activeIndex, setActiveIndex] = useState(state.currentWeekIndex);
 
-  const dateHeaders = state.weeks.map(({ weekStartDateFormatted }) => ({
-    title: weekStartDateFormatted
-  }))
-
+  // Every time the current week is updated in the state, 
+  // we want to snap to that week's header
   useEffect(() => {
-    snapToItem(state.currentWeekIndex);
+    snapToWeek(state.currentWeekIndex);
     setActiveIndex(state.currentWeekIndex);
   }, [state.currentWeekIndex])
 
-  const snapToItem = (index) => {
+  /**
+   * Helper function to snap to the current active item using 
+   *  a reference to the date carousel
+   * @param {number} index Postition of active week in the list
+   */
+  const snapToWeek = (index) => {
     ref.current?.snapToItem?.(index);
   }
 
-  const onSnapToItem = (index) => {
+  /**
+   * Callback when the user scrolls to a different week,
+   * This updates the state and context
+   * @param {number} index Postition of active week in the list
+   */
+  const onSnapToWeek = (index) => {
     setActiveIndex(index);
     dispatch({
       type: Actions.SET_WEEK,
@@ -62,17 +72,36 @@ const DateCarousel = () => {
     })
   }
 
+  /**
+   * Wrapper for each header that's returned in the date carousel flatlist
+   * @param {object} week Week in the format it should be displayed (e.g. "Feb 6")
+   * @param {number} index Index of the new week to snap to
+   * @component
+   */
+  const renderWeek = ({ week, index }) => {
+    return (
+      <DateHeader title={week} onPress={() => snapToWeek(index)}></DateHeader>
+    )
+  }
+
+  // The width of each week header should be half the width of the screen
+  const { width: screenWidth } = useWindowDimensions();
+  const itemWidth = screenWidth / 2;
+
+  // The data in our carousel will be a list of week title's (e.g. "Feb 6")
+  const dateHeaders = state.weeks.map(({ weekStartDateFormatted }) => (weekStartDateFormatted))
+
   return (
     <View style={styles.container}>
       <Carousel
         layout={"default"}
         ref={ref}
         data={dateHeaders}
-        renderItem={({ item, index }) => _renderItem({ item, index, snapToItem })}
+        renderItem={({ item: week, index }) => renderWeek({ week, index })}
         sliderWidth={screenWidth}
         itemWidth={itemWidth}
         firstItem={activeIndex}
-        onSnapToItem={onSnapToItem} />
+        onSnapToItem={onSnapToWeek} />
     </View>
   )
 }

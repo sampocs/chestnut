@@ -9,26 +9,30 @@ import {
 import Colors from '../constants/Colors.js';
 import Fonts from '../constants/Fonts.js';
 import PurchaseItem from './PurchaseItem.js';
-import ReactNativeHapticFeedback from "react-native-haptic-feedback";
 import Context from '../storage/Context.js';
 import Actions from '../storage/Actions.js';
+import triggerHaptic from '../utils/Haptic.js';
 
+// Maximum millisecond delay for a tap to be considered a double tap
 const DOUBLE_TAP_DELAY = 400;
 
+/**
+ * Displays all the purchases for a given day
+ * (identified by the week and day of week)
+ * @param {string} week Week in internal format (e.g. "2022-01-01") 
+ * @param {string} dow Day of week (e.g. "Sunday")
+ * @component 
+ */
 const DowPurchases = ({ week, dow }) => {
   const { state, dispatch } = useContext(Context);
-  const purchases = state[week].weeklyPurchases[dow];
+  const purchases = state.spending[week].weeklyPurchases[dow];
   const [deleteMode, setDeleteMode] = useState(false);
   const [lastHeaderTap, setLastHeaderTap] = useState(null);
 
-  const triggerHaptic = () => {
-    const hapticOptions = {
-      enableVibrateFallback: true,
-      ignoreAndroidSystemSettings: false
-    };
-    ReactNativeHapticFeedback.trigger("impactHeavy", hapticOptions)
-  }
-
+  /**
+   * Toggle whether each item has a "remove" option
+   * This is enabled/disabled by double tapping the day of week
+   */
   const toggleDeleteMode = () => {
     const time = new Date().getTime();
     const delta = time - lastHeaderTap;
@@ -36,11 +40,16 @@ const DowPurchases = ({ week, dow }) => {
     if (delta < DOUBLE_TAP_DELAY) {
       setDeleteMode(!deleteMode);
       setLastHeaderTap(null);
+      triggerHaptic();
     } else {
       setLastHeaderTap(time);
     }
   }
 
+  /**
+   * Handler for when an item is added
+   * Should trigger haptic feedback and update the global context
+   */
   const addItem = () => {
     triggerHaptic();
     dispatch({

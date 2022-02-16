@@ -12,17 +12,30 @@ import Fonts from '../constants/Fonts.js';
 import Colors from '../constants/Colors.js';
 import Context from '../storage/Context.js';
 import Actions from '../storage/Actions.js';
+import triggerHaptic from '../utils/Haptic.js';
 
-
+/**
+ * Component for a given expense, displaying the item name and amount spent 
+ * @param {string} week Week identifier in internal format (e.g. "2022-01-01")
+ * @param {string} dow Day of week identifier (e.g. "Sunday")
+ * @param {number} itemIndex Index of item in list of purchases for the given day
+ * @param {boolean} deleteMode Boolean to indicate if the user is in 'deleteMode'
+ *    at which point, the item price will be replaced by a remove button
+ * @component 
+ */
 const PurchaseItem = ({ week, dow, itemIndex, deleteMode }) => {
   const { state, dispatch, keyboardAvoidingScrollRef } = useContext(Context);
-  const purchase = state[week].weeklyPurchases[dow][itemIndex];
+  const purchase = state.spending[week].weeklyPurchases[dow][itemIndex];
 
   const [priceTextInputRef, setPriceTextInputRef] = useState(null);
 
   const [itemName, setItemName] = useState(purchase.name);
   const [itemPrice, setItemPrice] = useState(purchase.price);
 
+  /**
+   * Handler for when a item is update
+   * Registers the update with the global context
+   */
   const updateItem = () => {
     dispatch({
       type: Actions.UPDATE_ITEM,
@@ -36,7 +49,12 @@ const PurchaseItem = ({ week, dow, itemIndex, deleteMode }) => {
     })
   }
 
+  /**
+   * Handler for when an item is remove
+   * Should trigger haptic feedback and then remove the item from global context
+   */
   const removeItem = () => {
+    triggerHaptic();
     dispatch({
       type: Actions.REMOVE_ITEM,
       payload: {

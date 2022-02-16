@@ -14,7 +14,11 @@ import PropTypes from "prop-types";
 import Fonts from '../constants/Fonts.js';
 import Colors from '../constants/Colors';
 
-
+/**
+ * Borrowed from https://www.npmjs.com/package/react-native-prompt
+ * and modified styles
+ * @component
+ */
 export default class Prompt extends Component {
   static propTypes = {
     title: PropTypes.string.isRequired,

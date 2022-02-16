@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import {
   View,
   FlatList,
@@ -7,13 +7,18 @@ import {
 } from 'react-native';
 import WeekSummary from './WeekSummary.js';
 import Colors from '../constants/Colors.js';
-import Context from '../storage/Context.js';
-import {
-  getCurrentWeekStartDate,
-  formatDateInternal,
-  formatDateDisplayed
-} from '../storage/DateUtils.js';
 
+/**
+ * Renders a flatlist to display the amount spent across each week
+ * @param {Array[object]} weeklyData List of data to be displayed,
+ *    must contain the following keys:
+ *      weekInternal: internally formatted week (e.g. "2022-01-01")
+ *      weekFormatted: week in format to be displayed (e.g. "Jan 1")
+ *      weekIndex: index of week in list of all weeks
+ *      spent: amount spent for that week
+ *      budget: amount budgeted for that week
+ * @component 
+ */
 const HistoryBody = ({ weeklyData }) => {
   const { width: screenWidth } = useWindowDimensions();
 

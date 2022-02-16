@@ -1,11 +1,4 @@
-import React, { createContext, useReducer, useState } from 'react';
-import {
-  SafeAreaView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import React, { useReducer, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import WeekScreen from './screens/WeekScreen.js';

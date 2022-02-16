@@ -2,18 +2,21 @@ import React, { useContext } from 'react';
 import {
   View,
   Text,
-  StyleSheet,
-  useWindowDimensions
+  StyleSheet
 } from 'react-native';
 import Colors from '../constants/Colors.js';
 import Fonts from '../constants/Fonts.js';
-import Context from '../storage/Context.js';
 
+/**
+ * Displays the weekly average spend across all historical spending 
+ * @param {number} weeklyAverage Weekly average spend  
+ * @component 
+ */
 const HistoryHeader = ({ weeklyAverage }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.spentText}>${weeklyAverage}</Text>
-      <Text style={styles.averageText}>Weekly Average</Text>
+      <Text style={styles.labelText}>Weekly Average</Text>
     </View>
   )
 }
@@ -32,7 +35,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 10
   },
-  averageText: {
+  labelText: {
     color: Colors.white,
     fontFamily: Fonts.avenirNext,
     fontSize: 20,
