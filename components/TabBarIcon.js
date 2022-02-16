@@ -1,5 +1,6 @@
 import React from 'react';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import Colors from "../constants/Colors";
 
 /**
@@ -9,16 +10,14 @@ import Colors from "../constants/Colors";
  * @component 
  */
 const TabBarIcon = ({ route, focused }) => {
-    let iconName;
     let color = focused ? Colors.blueDark : Colors.greyMed;
-    if (route.name === 'Week') {
-        iconName = 'list-ul'
-
+    if (route.name === 'Purchases') {
+        return <FontAwesomeIcon name={'list-ul'} size={25} color={color} />
     } else if (route.name === 'History') {
-        iconName = 'calendar'
+        return <MaterialIcon name={'history'} size={35} color={color} style={{marginBottom: -3}}/>
     }
 
-    return <Icon name={iconName} size={25} color={color} />
+    return null;
 }
 
 export default TabBarIcon;

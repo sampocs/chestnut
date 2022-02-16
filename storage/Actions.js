@@ -3,7 +3,8 @@ const Actions = {
   UPDATE_BUDGET: 'UPDATE_BUDGET',
   ADD_ITEM: 'ADD_ITEM',
   REMOVE_ITEM: 'REMOVE_ITEM',
-  UPDATE_ITEM: 'UPDATE_ITEM'
+  UPDATE_ITEM: 'UPDATE_ITEM',
+  ADD_WEEK: 'ADD_WEEK'
 }
 
 export default Actions;

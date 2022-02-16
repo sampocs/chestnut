@@ -34,7 +34,7 @@ const App = () => {
             tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} route={route} />
           })}
         >
-          <Tab.Screen name="Week" component={WeekScreen} />
+          <Tab.Screen name="Purchases" component={WeekScreen} />
           <Tab.Screen name="History" component={HistoryScreen} />
         </Tab.Navigator>
       </NavigationContainer>

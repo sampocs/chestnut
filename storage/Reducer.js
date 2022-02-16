@@ -1,4 +1,7 @@
 import Actions from './Actions.js';
+import {
+  addWeekToState
+} from '../storage/InitialState.js';
 
 /**
  * Confirm that the given week (e.g. "2022-01-01") and day of week (e.g. "Sunday") 
@@ -174,6 +177,8 @@ export const Reducer = (state, action) => {
       return removeItem(state, action.payload);
     case Actions.UPDATE_ITEM:
       return updateItem(state, action.payload);
+    case Actions.ADD_WEEK:
+      return addWeekToState(state);
     default:
       return state;
   }
