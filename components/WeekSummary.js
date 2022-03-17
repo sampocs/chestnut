@@ -35,12 +35,12 @@ const WeekSummary = ({ weekIndex, weekFormatted, spent, budget }) => {
    */
   const onPressWeek = () => {
     dispatch({
-      type: Actions.SET_WEEK,
+      type: Actions.SET_WEEK_FROM_INDEX,
       payload: {
         index: weekIndex
       }
     });
-    navigation.navigate('Week');
+    navigation.navigate('Purchases');
   }
 
   return (

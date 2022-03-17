@@ -65,7 +65,7 @@ const DateCarousel = () => {
   const onSnapToWeek = (index) => {
     setActiveIndex(index);
     dispatch({
-      type: Actions.SET_WEEK,
+      type: Actions.SET_WEEK_FROM_INDEX,
       payload: {
         index: index
       }

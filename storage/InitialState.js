@@ -36,10 +36,10 @@ import {
  * 
  */
 
+export const NUM_WEEKS_IN_FUTURE = 10;
 const firstWeekStartDate = getCurrentWeekStartDate();
 const firstWeekInternal = formatDateInternal(firstWeekStartDate);
 const firstWeekDisplayed = formatDateDisplayed(firstWeekStartDate);
-const numWeeksInFuture = 10;
 const initialBudget = 300;
 const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
@@ -112,7 +112,7 @@ let InitialState = {
   }
 };
 
-for (let weekNum = 0; weekNum < numWeeksInFuture; weekNum++) {
+for (let weekNum = 0; weekNum < NUM_WEEKS_IN_FUTURE; weekNum++) {
   InitialState = addWeekToState(InitialState);
 }
 

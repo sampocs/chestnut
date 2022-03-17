@@ -3,6 +3,7 @@ import {
   View,
   FlatList,
   StyleSheet,
+  Text,
   useWindowDimensions
 } from 'react-native';
 import WeekSummary from './WeekSummary.js';
@@ -24,13 +25,22 @@ const HistoryBody = ({ weeklyData }) => {
 
   return (
     <View style={styles.container}>
-      <FlatList
-        contentContainerStyle={{ width: screenWidth, paddingTop: 10 }}
-        data={weeklyData}
-        renderItem={({ item }) => (
-          <WeekSummary {...item} />
-        )}
-      />
+      {weeklyData.length === 0
+        ?
+        <View style={styles.noPurchasesContainer}>
+          <Text style={styles.noPurchaseHeaderText}>You haven't added any purchases yet!</Text>
+          <Text style={styles.noPurchaseBodyText}>Head back to the main tab to log your first expense!</Text>
+        </View>
+        :
+        <FlatList
+          contentContainerStyle={{ width: screenWidth, paddingTop: 10 }}
+          data={weeklyData}
+          renderItem={({ item }) => (
+            <WeekSummary {...item} />
+          )}
+        />
+      }
+
     </View>
   )
 }
@@ -41,6 +51,22 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
     alignItems: 'center',
   },
+  noPurchasesContainer: {
+    height: '80%',
+    width: '75%',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  noPurchaseHeaderText: {
+    fontSize: 30,
+    textAlign: 'center',
+    paddingBottom: 30
+  },
+  noPurchaseBodyText: {
+    fontSize: 15,
+    textAlign: 'center',
+    paddingHorizontal: 20
+  }
 });
 
 export default HistoryBody;

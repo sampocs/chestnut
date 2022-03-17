@@ -24,7 +24,7 @@ import triggerHaptic from '../utils/Haptic.js';
  * @component 
  */
 const PurchaseItem = ({ week, dow, itemIndex, deleteMode }) => {
-  const { state, dispatch, keyboardAvoidingScrollRef } = useContext(Context);
+  const { state, dispatch } = useContext(Context);
   const purchase = state.spending[week].weeklyPurchases[dow][itemIndex];
 
   const [priceTextInputRef, setPriceTextInputRef] = useState(null);
@@ -82,7 +82,7 @@ const PurchaseItem = ({ week, dow, itemIndex, deleteMode }) => {
           onSubmitEditing={() => {
             if (priceTextInputRef != null && itemPrice === '') {
               priceTextInputRef.focus()
-            }
+            } 
           }}
         />
       </View>
@@ -110,9 +110,6 @@ const PurchaseItem = ({ week, dow, itemIndex, deleteMode }) => {
               onChangeText={setItemPrice}
               onEndEditing={() => {
                 updateItem();
-                if (dow === 'Friday' || dow === 'Saturday') {
-                  keyboardAvoidingScrollRef.scrollToEnd();
-                }
               }}
               returnKeyType={'done'}
             />}
@@ -148,8 +145,8 @@ const styles = StyleSheet.create({
     paddingTop: 2
   },
   deleteButtonText: {
-    color: Colors.redDark,
-    fontFamily: Fonts.avenirNext,
+    color: Colors.redLight,
+    fontFamily: Fonts.arial,
     fontSize: 12
   },
   priceTextInputContainer: {

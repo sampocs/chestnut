@@ -53,7 +53,7 @@ const BudgetHeader = () => {
    */
   const onUpdateBudget = (text) => {
     // Hide the prompt on submit
-    setPromptVisible(false);
+    setUpdateBudgetPromptVisible(false);
 
     // Check if they passed a valid budget
     // If the budget isn't valid, throw an alert
@@ -75,7 +75,7 @@ const BudgetHeader = () => {
   return (
     <TouchableWithoutFeedback
       onPress={Keyboard.dismiss}
-      onLongPress={() => setPromptVisible(true)}>
+      onLongPress={() => setUpdateBudgetPromptVisible(true)}>
       <View style={styles.container}>
         <Prompt
           visible={updateBudgetPromptVisible}

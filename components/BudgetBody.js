@@ -1,15 +1,17 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useRef } from 'react';
 import {
   View,
   StyleSheet,
   FlatList,
   useWindowDimensions,
-  Text
+  Text,
+  ScrollView
 } from 'react-native';
 import Colors from '../constants/Colors.js';
 import DowPurchases from './DowPurchases.js';
 import Context from '../storage/Context.js';
-import { KeyboardAwareFlatList } from 'react-native-keyboard-aware-scroll-view';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 /**
  * Returns a flatlist containing all the weekly purchases
@@ -17,20 +19,19 @@ import { KeyboardAwareFlatList } from 'react-native-keyboard-aware-scroll-view';
  */
 const BudgetBody = () => {
   const { width: screenWidth } = useWindowDimensions();
-  const { state, setKeyboardAvoidingScrollRef } = useContext(Context);
+  const { state } = useContext(Context);
   const { currentWeek } = state;
-
+  
   return (
     <View style={styles.container}>
-      <KeyboardAwareFlatList
-        innerRef={setKeyboardAvoidingScrollRef}
-        enableResetScrollToCoords={false}
+      <KeyboardAwareScrollView
+        scrollEventThrottle={16}
         contentContainerStyle={{ width: screenWidth, paddingTop: 10 }}
-        data={state.daysOfWeek}
-        renderItem={({ item }) => (
-          <DowPurchases week={currentWeek} dow={item} />
-        )}
-      />
+      >
+        {state.daysOfWeek.map((item, index) => {
+          return  <DowPurchases week={currentWeek} dow={item} key={index} />
+        })}
+      </KeyboardAwareScrollView>
     </View>
   )
 }

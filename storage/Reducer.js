@@ -50,14 +50,31 @@ const calculateTotalWeeklySpend = (daysOfWeek, weeklyPurchases) => {
 }
 
 /**
- * Sets the current week displayed on the main screen using 
+ * Sets the current week displayed on the main screen 
+ * using the index into the array of weeks 
  * @param {number} index Index of week to snap to 
  */
-const setWeek = (state, { index }) => {
+const setWeekFromIndex = (state, { index }) => {
   const newState = { ...state };
   const newWeek = state.weeks[index].weekStartDate;
   newState.currentWeek = newWeek;
   newState.currentWeekIndex = index;
+  return newState
+}
+
+/**
+ * Sets the current week displayed on the main screen using 
+ * the start date of the week
+ * @param {string} weekStartDate First day of week in format YYYY-MM-DD
+ */
+ const setWeekFromDate = (state, { weekStartDate }) => {
+  const newState = { ...state };
+  for (let index = 0; index < state.weeks.length; index++) {
+    if (state.weeks[index] === weekStartDate) {
+      newState.currentWeek = weekStartDate;
+      newState.currentWeekIndex = index;
+    }
+  }
   return newState
 }
 
@@ -165,10 +182,12 @@ const updateItem = (state, { week, dow, itemIndex, itemName, itemPrice }) => {
   return newState;
 }
 
-export const Reducer = (state, action) => {
+const Reducer = (state, action) => {
   switch (action.type) {
-    case Actions.SET_WEEK:
-      return setWeek(state, action.payload);
+    case Actions.SET_WEEK_FROM_INDEX:
+      return setWeekFromIndex(state, action.payload);
+    case Actions.SET_WEEK_FROM_DATE:
+      return setWeekFromDate(state, action.payload);
     case Actions.UPDATE_BUDGET:
       return updateBudget(state, action.payload);
     case Actions.ADD_ITEM:
@@ -179,7 +198,11 @@ export const Reducer = (state, action) => {
       return updateItem(state, action.payload);
     case Actions.ADD_WEEK:
       return addWeekToState(state);
+    case Actions.SET_STATE:
+      return { ...action.payload.state };
     default:
       return state;
   }
 }
+
+export default Reducer;
