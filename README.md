@@ -2,7 +2,7 @@
 * Simple spending tracker built in React Native
 * Habit research shows that the best way to stay on a budget is to manually track each expense as it happens. The existing online spending trackers automatically connect with your accounts, so while it gives a good picture at the end of the month, it doesn't help influence your behavior. 
 ## Building
-* Must have a membership with the Apple Developer Program
+* DISCLAIMER: You must have a membership with the Apple Developer Program in order to install this app
 * Follow these [steps](https://developer.apple.com/documentation/xcode/distributing-your-app-to-registered-devices) to and follow instructions to create a certificate and sign 
 * Open `chestnut.xcworkspace`
 * Remove `libRNReactNativeHapticFeedback.a` from `Link Binary with Libraries` (under `Build Phases`)
@@ -10,6 +10,6 @@
 * Confirm build version on main screen
 * Create an Archive 
     * Select device in the target bar at the top 
-    * Go to `Window` -> `Archive`
+    * Go to `Product` -> `Archive`
 * Click `Distribute App` and then `Ad Hoc`
 * Use Apple Configurator 2 to upload the `.ipa` file to the device 

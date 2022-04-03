@@ -70,7 +70,7 @@ const setWeekFromIndex = (state, { index }) => {
  const setWeekFromDate = (state, { weekStartDate }) => {
   const newState = { ...state };
   for (let index = 0; index < state.weeks.length; index++) {
-    if (state.weeks[index] === weekStartDate) {
+    if (state.weeks[index].weekStartDate === weekStartDate) {
       newState.currentWeek = weekStartDate;
       newState.currentWeekIndex = index;
     }

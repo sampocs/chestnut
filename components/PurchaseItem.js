@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
   View,
   TextInput,
@@ -31,6 +31,11 @@ const PurchaseItem = ({ week, dow, itemIndex, deleteMode }) => {
 
   const [itemName, setItemName] = useState(purchase.name);
   const [itemPrice, setItemPrice] = useState(purchase.price);
+
+  useEffect(() => {
+    setItemName(purchase.name);
+    setItemPrice(purchase.price)
+  }, [purchase])
 
   /**
    * Handler for when a item is update
