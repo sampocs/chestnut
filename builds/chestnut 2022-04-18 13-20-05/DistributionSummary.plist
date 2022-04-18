@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>chestnut.ipa</key>
+	<array>
+		<dict>
+			<key>architectures</key>
+			<array>
+				<string>arm64</string>
+			</array>
+			<key>buildNumber</key>
+			<string>3</string>
+			<key>certificate</key>
+			<dict>
+				<key>SHA1</key>
+				<string>CD9CC53E1B9FF53CDC344543227790470FF08EE4</string>
+				<key>dateExpires</key>
+				<string>3/17/23</string>
+				<key>type</key>
+				<string>Cloud Managed Apple Distribution</string>
+			</dict>
+			<key>embeddedBinaries</key>
+			<array>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>buildNumber</key>
+					<string>1</string>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>CD9CC53E1B9FF53CDC344543227790470FF08EE4</string>
+						<key>dateExpires</key>
+						<string>3/17/23</string>
+						<key>type</key>
+						<string>Cloud Managed Apple Distribution</string>
+					</dict>
+					<key>name</key>
+					<string>OpenSSL.framework</string>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>3W3H65F89G</string>
+						<key>name</key>
+						<string>Sam Pochyly</string>
+					</dict>
+					<key>versionNumber</key>
+					<string>1.1.180</string>
+				</dict>
+			</array>
+			<key>entitlements</key>
+			<dict>
+				<key>application-identifier</key>
+				<string>3W3H65F89G.com.pochyly.chestnut</string>
+				<key>com.apple.developer.team-identifier</key>
+				<string>3W3H65F89G</string>
+				<key>get-task-allow</key>
+				<false/>
+				<key>keychain-access-groups</key>
+				<array>
+					<string>3W3H65F89G.com.pochyly.chestnut</string>
+				</array>
+			</dict>
+			<key>name</key>
+			<string>chestnut.app</string>
+			<key>profile</key>
+			<dict>
+				<key>UUID</key>
+				<string>b42f827e-5e3b-41b6-9e21-de08fff6a65b</string>
+				<key>dateExpires</key>
+				<string>3/17/23</string>
+				<key>name</key>
+				<string>iOS Team Ad Hoc Provisioning Profile: com.pochyly.chestnut</string>
+			</dict>
+			<key>team</key>
+			<dict>
+				<key>id</key>
+				<string>3W3H65F89G</string>
+				<key>name</key>
+				<string>Sam Pochyly</string>
+			</dict>
+			<key>versionNumber</key>
+			<string>1.2</string>
+		</dict>
+	</array>
+</dict>
+</plist>

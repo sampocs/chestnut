@@ -1,15 +1,11 @@
-import React, { useState, useRef, useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import {
-  View,
-  Text,
-  StyleSheet,
-  useWindowDimensions,
-  TouchableWithoutFeedback
+  StyleSheet, Text, TouchableWithoutFeedback, useWindowDimensions, View
 } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
-import Actions from '../storage/Actions.js';
+import Colors from '../constants/Colors.js';
 import Fonts from '../constants/Fonts.js';
-import Colors from '../constants/Colors.js'
+import Actions from '../storage/Actions.js';
 import Context from '../storage/Context.js';
 
 /**

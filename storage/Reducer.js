@@ -1,7 +1,7 @@
-import Actions from './Actions.js';
 import {
   addWeekToState
 } from '../storage/InitialState.js';
+import Actions from './Actions.js';
 
 /**
  * Confirm that the given week (e.g. "2022-01-01") and day of week (e.g. "Sunday") 
@@ -67,7 +67,7 @@ const setWeekFromIndex = (state, { index }) => {
  * the start date of the week
  * @param {string} weekStartDate First day of week in format YYYY-MM-DD
  */
- const setWeekFromDate = (state, { weekStartDate }) => {
+const setWeekFromDate = (state, { weekStartDate }) => {
   const newState = { ...state };
   for (let index = 0; index < state.weeks.length; index++) {
     if (state.weeks[index].weekStartDate === weekStartDate) {

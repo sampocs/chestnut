@@ -62,7 +62,7 @@ export const addWeekToDate = (startWeek, numWeeks) => {
  * @param {string} endDate End date in format YYYY-MM-DD
  */
 export const getWeekDifference = (startDate, endDate) => {
-  const end =  new moment(endDate)
+  const end = new moment(endDate)
   const start = new moment(startDate);
   const dateDiff = moment.duration(end.diff(start)).asDays();
   return (dateDiff / 7);

@@ -1,21 +1,19 @@
-import React, { useEffect, useReducer, useState, useRef } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import AsyncStorage from "@react-native-community/async-storage";
-import WeekScreen from './screens/WeekScreen.js';
-import HistoryScreen from './screens/HistoryScreen.js';
-import Colors from './constants/Colors.js';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { NavigationContainer } from '@react-navigation/native';
+import React, { useEffect, useReducer, useState } from 'react';
+import SplashScreen from "react-native-splash-screen";
 import TabBarIcon from './components/TabBarIcon.js';
+import Colors from './constants/Colors.js';
+import HistoryScreen from './screens/HistoryScreen.js';
+import WeekScreen from './screens/WeekScreen.js';
 import Actions from './storage/Actions.js';
-import Reducer from './storage/Reducer.js';
-import InitialState, { NUM_WEEKS_IN_FUTURE } from './storage/InitialState.js';
 import Context from './storage/Context.js';
+import InitialState, { NUM_WEEKS_IN_FUTURE } from './storage/InitialState.js';
+import Reducer from './storage/Reducer.js';
 import {
-  getCurrentWeekStartDate,
-  formatDateInternal,
-  getWeekDifference
+  formatDateInternal, getCurrentWeekStartDate, getWeekDifference
 } from './utils/DateUtils.js';
-import SplashScreen from  "react-native-splash-screen";
 
 const Tab = createBottomTabNavigator();
 
@@ -38,19 +36,19 @@ const App = () => {
       // Pull the state from storage
       const state = await readStateFromStorage();
       if (state !== undefined) {
-        dispatch({
-          type: Actions.SET_STATE,
-          payload: {
-            state: state
-          }
-        });
-
         // Update the current week
         const currentWeek = formatDateInternal(getCurrentWeekStartDate());
-        dispatch({
+        const stateWithUpdatedWeek = Reducer(state, {
           type: Actions.SET_WEEK_FROM_DATE,
           payload: {
             weekStartDate: currentWeek
+          }
+        })
+        // Set the state from the state persisted in storage
+        dispatch({
+          type: Actions.SET_STATE,
+          payload: {
+            state: stateWithUpdatedWeek
           }
         });
 
@@ -63,10 +61,10 @@ const App = () => {
           });
         }
       }
+      setIsLoading(false);
+      SplashScreen.hide();
     }
-    SplashScreen.hide();
     loadState();
-    setIsLoading(false);
   }, [])
 
   useEffect(() => {
@@ -79,11 +77,11 @@ const App = () => {
     state,
     dispatch
   }
-  
+
   if (isLoading) {
     return null;
   }
-  
+
   return (
     <Context.Provider value={contextValues}>
       <NavigationContainer>

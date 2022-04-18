@@ -1,14 +1,12 @@
 import React, { useContext } from 'react';
 import {
-  View,
-  StatusBar
+  StatusBar, View
 } from "react-native";
-import HistoryHeader from '../components/HistoryHeader.js';
 import HistoryBody from '../components/HistoryBody.js';
+import HistoryHeader from '../components/HistoryHeader.js';
 import Context from '../storage/Context.js';
 import {
-  getCurrentWeekStartDate,
-  formatDateInternal
+  addWeekToDate, formatDateInternal, getCurrentWeekStartDate
 } from '../utils/DateUtils.js';
 
 /**
@@ -33,9 +31,10 @@ const HistoryScreen = () => {
       budget: parseInt(state.spending[weekObj.weekStartDate].budget),
     }))
 
-    // Filter to just weeks from the current week backwards
+    // Filter to just weeks from the current week backwards 
+    // (excluding the active week since the amount spent will be incomplete)
     // Sum the total spent across those weeks to get the average spend
-    const currentWeek = formatDateInternal(getCurrentWeekStartDate());
+    const currentWeek = formatDateInternal(addWeekToDate(getCurrentWeekStartDate(), -1));
     let totalSpent = 0;
     let numWeeks = 0;
     let weeklyDataToDisplay = [];
