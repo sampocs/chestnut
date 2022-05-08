@@ -4,11 +4,13 @@
 
 ## Screen Shots
 <p float="left">
-<img src="https://github.com/sampocs/chestnut/blob/main/assets/screen-shots/splash.png" width="200" height="430"/>
-<img src="https://github.com/sampocs/chestnut/blob/main/assets/screen-shots/main.jpeg" width="200" height="430"/>
-<img src="https://github.com/sampocs/chestnut/blob/main/assets/screen-shots/remove.jpeg" width="200" height="430"/>
-<img src="https://github.com/sampocs/chestnut/blob/main/assets/screen-shots/budget.jpeg" width="200" height="430"/>
-<img src="https://github.com/sampocs/chestnut/blob/main/assets/screen-shots/history.jpeg" width="200" height="430"/>
+    <img src="https://github.com/sampocs/chestnut/blob/main/assets/screen-shots/splash.png" width="200" height="430"/>
+    <img src="https://github.com/sampocs/chestnut/blob/main/assets/screen-shots/main.jpeg" width="200" height="430"/>
+    <img src="https://github.com/sampocs/chestnut/blob/main/assets/screen-shots/history.jpeg" width="200" height="430"/>
+</p>
+<p float="left">
+    <img src="https://github.com/sampocs/chestnut/blob/main/assets/screen-shots/remove.jpeg" width="200" height="430"/>
+    <img src="https://github.com/sampocs/chestnut/blob/main/assets/screen-shots/budget.jpeg" width="200" height="430"/>
 </p>
 
 ## Building
