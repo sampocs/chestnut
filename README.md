@@ -13,7 +13,10 @@
     <img src="https://github.com/sampocs/chestnut/blob/main/assets/screen-shots/budget.jpeg" width="200" height="430"/>
 </p>
 
-## Building
+## Development
+* Open `chestnut.xcworkspace` and click the play button
+
+## Building an Archive
 * DISCLAIMER: You must have a membership with the Apple Developer Program in order to install this app
 * Follow these [steps](https://developer.apple.com/documentation/xcode/distributing-your-app-to-registered-devices) to and follow instructions to create a certificate and sign 
 * Open `chestnut.xcworkspace`
@@ -21,7 +24,15 @@
     * For some reason, this was needed in to build the app but threw an error when trying to build an Archive
 * Confirm build version on main screen
 * Create an Archive 
-    * Select device in the target bar at the top 
+    * Connect your device and select it from the target bar at the top 
     * Go to `Product` -> `Archive`
+
+## Distributing via USB
 * Click `Distribute App` and then `Ad Hoc`
 * Use Apple Configurator 2 to upload the `.ipa` file to the device 
+
+## Distributing via TestFlight
+* Click `Distribute App` and then `App Store Connect`
+* Click `Upload`
+* It will take ~15 minutes for the new build to show up in `apple.developer.com`
+    * When asked whether the app uses encryption, select "no"

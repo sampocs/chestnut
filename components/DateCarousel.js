@@ -97,6 +97,12 @@ const DateCarousel = () => {
         sliderWidth={screenWidth}
         itemWidth={itemWidth}
         firstItem={activeIndex}
+        initialScrollIndex={activeIndex}
+        getItemLayout={(_, index) => ({
+          length: itemWidth,
+          offset: itemWidth * index,
+          index,
+        })}
         onSnapToItem={onSnapToWeek} />
     </View>
   )
