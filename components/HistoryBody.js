@@ -1,13 +1,12 @@
 import React from 'react';
 import {
-  View,
   FlatList,
   StyleSheet,
   Text,
-  useWindowDimensions
+  useWindowDimensions, View
 } from 'react-native';
-import WeekSummary from './WeekSummary.js';
 import Colors from '../constants/Colors.js';
+import WeekSummary from './WeekSummary.js';
 
 /**
  * Renders a flatlist to display the amount spent across each week
@@ -28,7 +27,7 @@ const HistoryBody = ({ weeklyData }) => {
       {weeklyData.length === 0
         ?
         <View style={styles.noPurchasesContainer}>
-          <Text style={styles.noPurchaseHeaderText}>You haven't added any purchases yet!</Text>
+          <Text style={styles.noPurchaseHeaderText}>You haven't finished your first week of purchases yet!</Text>
           <Text style={styles.noPurchaseBodyText}>Head back to the main tab to log your first expense!</Text>
         </View>
         :
