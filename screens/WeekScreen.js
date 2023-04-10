@@ -1,11 +1,11 @@
 import React from 'react';
 import {
-  View,
-  StatusBar
+  StatusBar, View
 } from "react-native";
+import BudgetBody from '../components/BudgetBody.js';
 import BudgetHeader from '../components/BudgetHeader.js';
 import DateCarousel from '../components/DateCarousel.js';
-import BudgetBody from '../components/BudgetBody.js';
+import HelpButton from '../components/HelpButton.js';
 
 /**
  * Returns the screen displaying items spent for given week
@@ -18,6 +18,7 @@ const WeekScreen = () => {
       <StatusBar barStyle="light-content" />
       <View style={{ flex: 1 }}>
         <BudgetHeader />
+        <HelpButton />
         <DateCarousel />
         <BudgetBody />
       </View>
