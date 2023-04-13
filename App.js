@@ -6,6 +6,7 @@ import React, { useEffect, useReducer, useState } from 'react';
 import SplashScreen from "react-native-splash-screen";
 import TabBarIcon from './components/TabBarIcon.js';
 import Colors from './constants/Colors.js';
+import { STORAGE_ONBOARDING, STORAGE_STATE } from "./constants/State.js";
 import HistoryScreen from './screens/HistoryScreen.js';
 import OnboardingScreen from "./screens/OnboardingScreen.js";
 import WeekScreen from './screens/WeekScreen.js';
@@ -23,7 +24,7 @@ const AppStack = createNativeStackNavigator();
 
 const readStateFromStorage = async () => {
   try {
-    const state = await AsyncStorage.getItem('state');
+    const state = await AsyncStorage.getItem(STORAGE_STATE);
     return state ? JSON.parse(state) : InitialState;
   } catch (e) {
     console.log('Failed to fetch data from storage');
@@ -66,8 +67,7 @@ const App = () => {
   useEffect(() => {
     async function loadState() {
       // Check whether the user has completed the onboarding instructions
-      const onboardingComplete = await AsyncStorage.getItem('onboarding-complete');
-      console.log(onboardingComplete);
+      const onboardingComplete = await AsyncStorage.getItem(STORAGE_ONBOARDING);
       setIsOnboardingComplete(onboardingComplete === 'true');
 
       // Pull the state from storage

@@ -2,6 +2,7 @@ import AsyncStorage from "@react-native-community/async-storage";
 import { useRoute } from '@react-navigation/native';
 import React from 'react';
 import { Dimensions, ImageBackground, StatusBar, TouchableOpacity, View } from "react-native";
+import { STORAGE_ONBOARDING } from "../constants/State.js";
 
 /**
  * Returns the screen with onboarding instructions
@@ -27,7 +28,7 @@ const OnboardingScreen = ({ navigation }) => {
         index: 0,
         routes: [{ name: 'MainApp' }],
       });
-      AsyncStorage.setItem('onboardingComplete', 'true');
+      AsyncStorage.setItem(STORAGE_ONBOARDING, 'true');
     }
   };
 
