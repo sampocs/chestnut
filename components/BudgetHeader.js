@@ -1,18 +1,13 @@
 import React, { useContext, useState } from 'react';
 import {
-  View,
-  Text,
-  StyleSheet,
-  useWindowDimensions,
-  TouchableWithoutFeedback,
-  Keyboard,
-  Alert
+  Alert, Keyboard, StyleSheet, Text, TouchableWithoutFeedback, useWindowDimensions, View
 } from 'react-native';
 import Prompt from '../components/Prompt.js';
-import Context from '../storage/Context.js';
-import Actions from '../storage/Actions.js';
 import Colors from '../constants/Colors.js';
 import Fonts from '../constants/Fonts.js';
+import Actions from '../storage/Actions.js';
+import Context from '../storage/Context.js';
+
 
 /**
  * Returns the header component on the budget screen that
