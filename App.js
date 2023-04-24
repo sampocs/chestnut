@@ -45,7 +45,6 @@ const OnboardingNavigator = () => {
 const TabNavigator = () => {
   return (
     <Tab.Navigator
-      initialRouteName="Week"
       screenOptions={({ route }) => ({
         headerShown: false,
         tabBarActiveTintColor: Colors.blueDark,
@@ -106,7 +105,7 @@ const App = () => {
 
   useEffect(() => {
     if (state) {
-      AsyncStorage.setItem('state', JSON.stringify(state));
+      AsyncStorage.setItem(STORAGE_STATE, JSON.stringify(state));
     }
   }, [state])
 
