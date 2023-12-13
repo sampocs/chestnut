@@ -28,7 +28,7 @@
     * Go to `Product` -> `Archive`
 
 ## Distributing via USB
-* Click `Distribute App` and then `Ad Hoc`
+* Click `Distribute App`, `Custom`, and then `Ad Hoc`
 * Use Apple Configurator 2 to upload the `.ipa` file to the device 
 
 ## Distributing via TestFlight
