@@ -2,7 +2,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { useEffect, useReducer, useState } from 'react';
-import SplashScreen from 'react-native-splash-screen';
 import TabBarIcon from './src/components/TabBarIcon';
 import Colors from './src/constants/Colors';
 import HistoryScreen from './src/screens/HistoryScreen';
@@ -64,8 +63,6 @@ export default function App() {
         }
       }
       setIsLoading(false);
-      // Hide splash screen once data is loaded
-      SplashScreen.hide();
     }
     loadState();
   }, []);
